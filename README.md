@@ -170,3 +170,4 @@ Après avoir créée un arbre balancé, on est maintenant sûr, que l'algorithme
 **Comparaison des performances :**
 
 La méthode normale pour faire une recherche est une boucle qui va itérer sur les éléments de la liste et va vérifier si l'élément recherché existe bien dans cette liste. La complexité de cette méthode est de l'ordre de n. On peut essayer de rechercher le dernier élément d'une liste pour avoir le pire des cas en matière de recherche. Il faut savoir aussi que le processus de la deuxième recherche contient d'abord le processus de transformation de liste en arbre, ce qui prend du temps aussi. Ici j'évalue temporellement les performances des deux méthodes de recherche. (In work)
+

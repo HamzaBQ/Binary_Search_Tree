@@ -5,6 +5,8 @@ import pygame
 from enum import Enum
 import time
 import sys
+import math
+import matplotlib.pyplot as plt
 
 
 black = 0, 0, 0
@@ -28,7 +30,7 @@ n_tabs = 0
 def print_tabs(n_tabs):
     print(' '*n_tabs, end = '')
 
-
+# display what was drawn
 def display():
     running = True
     while running:
@@ -37,6 +39,30 @@ def display():
                 running = False
             
             pygame.display.update()
+
+# brute force search
+def brute_search(listos, elet):
+    for item in listos:
+        if item == elet:
+            return True
+    return False
+
+# function to compare times taken 
+def time_it(func, *args):
+    start = time.time()
+    func(*args)
+    end = time.time()
+    return end - start
+
+# transform a list to a tree 
+def list_to_tree(my_list):
+    if len(my_list) == 0:
+        print('list is empty')
+        return
+    my_tree = Tree()
+    for item in my_list:
+        my_tree.balanced_inserting(item)
+    return my_tree
 
 # Node class 
 class Node():
@@ -271,7 +297,7 @@ class Tree():
 
 
     
-    def draw(self):
+    def draw(self, screen):
 
         print('*'*10 + 'TREE DRAWING' + '*'*10)
         
@@ -366,19 +392,6 @@ class Tree():
                     return self.__intern_search(node.left, key)
 
 
-def normal_search(listos, elet):
-    
-    for item in listos:
-        if item == elet:
-            return True
-    return False
-
-def time_it(func, *args):
-    start = time.time()
-    func(*args)
-    end = time.time()
-    return end - start
-
 def main():
     # list to be converted to tree
     listos = list(range(1,11))
@@ -395,10 +408,34 @@ def main():
     screen = pygame.display.set_mode((width, height))
     
     # drawing the tree
-    balanced_tree.draw()
+    balanced_tree.draw(screen)
     
     #print(time_it(normal_search, listos, 500))
     #print(time_it(balanced_tree.search, 500))
+
+    compare_performances()
+
+def compare_performances():
+    list_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000]
+    brute_perf = []
+    bst_perf = []
+    for length_ in list_lengths:
+        wanted_item = length_//2
+
+        my_list = list(range(length_))
+        rd.shuffle(my_list)
+        my_tree = list_to_tree(my_list)
+        brute_perf.append(time_it(brute_search, my_list, wanted_item))
+        bst_perf.append(time_it(my_tree.search, wanted_item))
+
+    log_list_lengths = [math.log10(i) for i in list_lengths]
+    line1 = plt.plot(log_list_lengths, bst_perf, 'r-')
+    line2 = plt.plot(log_list_lengths, brute_perf, 'b-')
+    plt.xlabel('logarithm of list lengths')
+    plt.ylabel('times taken')
+    plt.xticks(log_list_lengths)
+    plt.legend((line1, line2), ('bst_perf', 'brute_perf'))
+    plt.show()
 
 
 if __name__ == '__main__':
