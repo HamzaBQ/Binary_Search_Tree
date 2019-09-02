@@ -6,13 +6,13 @@ Les arbres sont une structure de données qui permet de stocker des éléments d
 
 Cette structure consiste en :
 
-- Une origine
+- Une racine
 - Des nœuds
 - Des branches (virtuelles)
 
 L'élément principal des arbres sont les nœuds puisque c'est eux qui portent les objets ques on veut stocker. L'un des attributs des un nœud est sa valeur, cette valeur peut être significative des elle-même, ou représentative des un objet contenant des autres informations.
 
-Les branches sont le représentant du lien entre les nœuds. Elles sont des liens dirigées (c'est-à-dire ques elles ont un nœud origine et un nœud destination), ainsi ils permettent aussi des avoir une hiérarchie entre les nœuds. En effet, L'origine est le plus haut de cette hiérarchie, et chaque nœud peut avoir :
+Les branches sont le représentant du lien entre les nœuds. Elles sont des liens dirigées (c'est-à-dire ques elles ont un nœud racine et un nœud destination), ainsi ils permettent aussi des avoir une hiérarchie entre les nœuds. En effet, La racine est le plus haut de cette hiérarchie, et chaque nœud peut avoir :
 
 - Des parents : ils sont les nœuds qui ont des branches vers ce nœud
 - Des enfants : ils sont les nœuds qui ont ce nœud comme parent
@@ -23,21 +23,21 @@ On définit aussi les feuilles comme étant les nœuds n'ayant pas des enfants. 
 
 **Propriétés :**
 
-Par conséquent, l'arbre peut être divisé en niveau. Effectivement, la racine est en niveau 0 et ses enfants sont dans le niveau 1, les enfants de ses enfants dans le niveau 2 et ainsi de suite. On peut dire que le lien de parenté avec l'origine définit le niveau dans lequel se trouve le nœud. Ainsi on peut définir :
+Par conséquent, l'arbre peut être divisé en niveau. Effectivement, la racine est en niveau 0 et ses enfants sont dans le niveau 1, les enfants de ses enfants dans le niveau 2 et ainsi de suite. On peut dire que le lien de parenté avec la racine définit le niveau dans lequel se trouve le nœud. Ainsi on peut définir :
 
 - Hauteur d'un nœud : Nombre de branches sur le chemin le plus long entre ce nœud et une feuille descendante.
-- Profondeur d'un nœud : Nombres de branches entre le nœud et l'origine.
+- Profondeur d'un nœud : Nombres de branches entre le nœud et la racine.
 
-A noter ici que la hauteur d'un nœud est différente de la profondeur du nœud. La première est calculée à partir de la feuille correspondante et la deuxième est par rapport à l'origine. Les repères de calcul de ses deux valeurs sont différents.
+A noter ici que la hauteur d'un nœud est différente de la profondeur du nœud. La première est calculée à partir de la feuille correspondante et la deuxième est par rapport à la racine. Les repères de calcul de ses deux valeurs sont différents.
 
-On définit la profondeur d'un arbre comme la hauteur de son origine. C'est la plus grande distance (en branches) entre l'origine et une feuille de l'arbre.
+On définit la profondeur d'un arbre comme la hauteur de sa racine. C'est la plus grande distance (en branches) entre la racine et une feuille de l'arbre.
 
 **Représentation informatique du nœud :**
 
 Attributs :
 
 - Key : valeur que stocke ce nœud.
-- Parents : liste de parents de ce nœuds ( = None s'il s'agit de l'origine de l'arbre).
+- Parents : liste de parents de ce nœuds ( = None s'il s'agit de la racine de l'arbre).
 - Enfants : liste d'enfants de ce nœuds ( = None ses il ses agit des une fille).
 - Height : hauteur du nœud.
 
@@ -58,7 +58,7 @@ Le fait que l'arbre est divisé en deux à chaque nœud de chaque niveau, permet
 
 **Représentation d'un arbre binaire :**
 
-L'arbre est représenté par son origine, tous les autres nœuds peuvent être accédés à partir de cette origine en utilisant les attributs « left » et « right ».
+L'arbre est représenté par sa racine, tous les autres nœuds peuvent être accédés à partir de cette racine en utilisant les attributs « left » et « right ».
 
 - Root : contient le nœud représentant
 - Ensemble de méthodes pour faire : insertion/suppression éléments, balancement d'arbre…
@@ -90,7 +90,7 @@ La création d'un arbre se fait par insertion des éléments dans un arbre vide.
 Les étapes suivies dans le code :
 
 - Création de la classe « Node() » contenant les informations d'un nœud.
-- Création de la classe « Tree() » ayant comme attribut l'origine de l'arbre.
+- Création de la classe « Tree() » ayant comme attribut la racine de l'arbre.
 
 Pour pouvoir faire le balancement des arbres par la suite, on ajoute les attributs :
 
@@ -101,14 +101,14 @@ Pour pouvoir faire le balancement des arbres par la suite, on ajoute les attribu
 
 Après ces étapes, on développe la méthode d'ajout des éléments dans l'arbre. Cette méthode est récursive et son implémentation repose sur le raisonnement suivant :
 
-- Si l'origine n'existe pas :
-  - Créer une origine et lui attribuer la valeur à ajouter.
+- Si la racine n'existe pas :
+  - Créer une racine et lui attribuer la valeur à ajouter.
 - Sinon :
-  - Comparer la valeur à ajouter avec l'origine :
+  - Comparer la valeur à ajouter avec la racine :
     - Si elle est plus grande :
-      - Ajouter la valeur dans l'arbre à droite de l'origine (en appelant la même fonction)
+      - Ajouter la valeur dans l'arbre à droite de la racine (en appelant la même fonction)
     - Sinon :
-      - Ajouter la valeur dans l'arbre à gauche de l'origine
+      - Ajouter la valeur dans l'arbre à gauche de la racine
 
 **Visualisation :**
 
