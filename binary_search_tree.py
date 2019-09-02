@@ -15,9 +15,6 @@ h_margin = 50
 width = 1300
 height = 500
 
-def set_screen_size(screen_width, screen_height):
-    global width, height
-    width, height = screen_width, screen_height
 
 class UnbalancementCase(int, Enum):
     LEFT_LEFT = 0
@@ -30,6 +27,16 @@ class UnbalancementCase(int, Enum):
 n_tabs = 0
 def print_tabs(n_tabs):
     print(' '*n_tabs, end = '')
+
+
+def display():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            
+            pygame.display.update()
 
 # Node class 
 class Node():
@@ -262,15 +269,6 @@ class Tree():
             i -= 1
         return coord_dict
 
-    
-    def display(self):
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                
-                pygame.display.update()
 
     
     def draw(self):
@@ -279,10 +277,6 @@ class Tree():
         
         # adding drawing coordinates to nodes 
         self.insert_coords()
-
-        # initialising drawing parameters with pygame 
-        pygame.init()
-        screen = pygame.display.set_mode((width, height))
         screen.fill(white)
         
         # case of empty tree
@@ -294,7 +288,7 @@ class Tree():
             text_rect.center = (width/2, height/2)
             screen.blit(text, text_rect)    
 
-            self.display()
+            display()
         
         else:
             tree_depth = self.depth
@@ -306,7 +300,7 @@ class Tree():
             coords_dict = self.get_coord_dict()
 
             self.draw_internal(self.root, screen)
-            self.display()
+            display()
     
     def draw_internal(self, node, screen):
         if node == None:
@@ -395,7 +389,11 @@ def main():
     # add elements to the tree
     for i in listos:
         balanced_tree.balanced_inserting(i)
-
+    
+    #initialising drawing parameters with pygame 
+    pygame.init()
+    screen = pygame.display.set_mode((width, height))
+    
     # drawing the tree
     balanced_tree.draw()
     
