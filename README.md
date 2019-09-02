@@ -97,7 +97,7 @@ Pour pouvoir faire le balancement des arbres par la suite, on ajoute les attribu
 - Parent : puisque dans un arbre binaire, un nœud ne peut avoir plusieurs parents, on ajoute cet attribut pour pouvoir traverser l'arbre dans le sens inverse.
 - Coords : Informations relatives aux coordonnées du nœud dans le plan (pour pouvoir dessiner l'arbre après, cette partie sera discutée après).
 
-'''python
+'''
 
 class Node():
     def __init__(self, key, left = None, right = None, parent = None, coords = None):
@@ -130,7 +130,7 @@ Après ces étapes, on développe la méthode d'ajout des éléments dans l'arbr
  
 Après s'avoir assuré que l'arbre n'est pas vide, la fonction récursive est appelée : 
 
-'''python
+'''
 
 def __insert_key(self, node, new_key):
     if new_key > node.key:
